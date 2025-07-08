@@ -1,27 +1,27 @@
- class paperBook extends   bookStore {
- private int stock;
+public class paperBook extends bookStore {
+    private int stock;
 
     public paperBook(String isbn, String title, int year, double price, String author, int stock) {
-        super(isbn, title,price, year, author);
+        super(isbn, title, price, year, author);
         this.stock = stock;
     }
 
-
-
-    @Override
+   
+ @Override
     public boolean isAviliable(int quantity) {
         return stock >= quantity;
     }
 
     @Override
-    public double buyBook(String isbn,int quantatiy,String email,String address) {
-        if (!isAviliable( quantatiy)) {
+    public double buyBook(String isbn, int quantity, String email, String address) {
+        if (!isAviliable(quantity)) {
             throw new RuntimeException("Quantum Bookstore: Not enough stock for ISBN: " + isbn);
         }
-        stock -= quantatiy;
+        stock -= quantity;
         ShippingService.send(this, address);
         System.out.println("Quantum Bookstore: Shipped paper book '" + title + "' to " + address);
-        return price * quantatiy;
+        return price * quantity;
     }
-}
 
+   
+}
